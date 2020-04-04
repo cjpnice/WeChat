@@ -1,0 +1,39 @@
+package com.cjpnice.wechat;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListFragment extends Fragment {
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.list,null);
+        List<ContactList> contactLists = initData();
+        ListAdapter listAdapter = new ListAdapter(contactLists);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView recyclerView = view.findViewById(R.id.list_recycler_view);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(listAdapter);
+        return view;
+    }
+
+    private List<ContactList> initData() {
+        List<ContactList> datas = new ArrayList<>();
+        datas.add(new ContactList(R.drawable.xinpengyou,"新的朋友"));
+        datas.add(new ContactList(R.drawable.qunliao,"群聊"));
+        datas.add(new ContactList(R.drawable.biaoqian,"标签"));
+        datas.add(new ContactList(R.drawable.gongzhonghao,"公众号"));
+        return datas;
+    }
+}
